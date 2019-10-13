@@ -56,6 +56,13 @@ Maybe try a different route?");
         Messages.Add($@"If you're not going North, South, East, or West... You're not going anywhere!");
       }
 
+      if (_game.CurrentRoom.Name == "five")
+      {
+        Messages.Clear();
+        Messages.Add(_game.CurrentRoom.Description);
+        // Reset();
+      }
+
 
       // switch (direction)
       // {
@@ -224,7 +231,7 @@ I know your completely aware of them and will have no need to, so we won't worry
       }
       else
       {
-        Messages.Add($@"There are no items in the room.");
+        Messages.Add($@"That is not an item you can take from this room.");
       }
     }
 
@@ -235,7 +242,41 @@ I know your completely aware of them and will have no need to, so we won't worry
     ///</summary>
     public void UseItem(string itemName)
     {
-      throw new System.NotImplementedException();
+
+
+      if (_game.CurrentPlayer.Inventory.Count > 0)
+      {
+        for (int i = 0; i < _game.CurrentPlayer.Inventory.Count; i++)
+        {
+
+          if (_game.CurrentPlayer.Inventory[i].Name.ToLower() == itemName)
+          {
+            if (_game.CurrentRoom.Name == "four")
+            {
+              Messages.Add($@"The item has been used! You are victorious!!!
+Type (Retry) to start again or (Quit) to close the application.");
+            }
+            else
+            {
+              Messages.Add($@"What are you doing?! You know that this is neither the time nor the place to be using that!");
+            }
+          }
+          else
+          {
+            //FIXME This is not printing due to the for loop not running because 0 !< 0
+            Messages.Add($@"You don't have that item.");
+          }
+
+        }
+      }
+      else
+      {
+        //FIXME This is not printing due to the for loop not running because 0 !< 0
+        Messages.Add($@"You don't have that item.");
+      }
+
+
+
     }
   }
 }

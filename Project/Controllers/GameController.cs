@@ -10,7 +10,7 @@ namespace ConsoleAdventure.Project.Controllers
   {
     private GameService _gameService = new GameService();
 
-
+    bool status = true;
     //NOTE Makes sure everything is called to finish Setup and Starts the Game loop
     public void Run()
     {
@@ -19,11 +19,14 @@ namespace ConsoleAdventure.Project.Controllers
       Console.Write("I am: ");
       string choice = Console.ReadLine();
       _gameService.Setup(choice);
-      while (true)
+
+      while (status)
       {
         Print();
         GetUserInput();
+
       }
+
     }
 
     //NOTE this should print your messages for the game.
@@ -70,11 +73,13 @@ namespace ConsoleAdventure.Project.Controllers
           break;
         case "quit":
         case "q":
-          _gameService.Quit();
+          // _gameService.Quit();
+          Environment.Exit(0);
           break;
         case "reset":
         case "r":
-          _gameService.Reset();
+          // _gameService.Reset();
+          Run();
           break;
         default:
           Console.Write(@"You sit contemplating your life choices...

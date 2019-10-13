@@ -14,7 +14,19 @@ namespace ConsoleAdventure.Project.Models
       Room two = new Room("two", "Test text for room 2.");
       Room three = new Room("three", $@"Test text for room 3. It has ");
       Room four = new Room("four", "Test text for room 4.");
-      Room five = new Room("five", "Test text for room 5.");
+      Room five = new Room("five", $@"It happened... 
+You've completely lost it. 
+You knew that by entering this room, there was no turning back. 
+Your choices have consequences. 
+Despite all the knowledge that you've accumulated over your lifetime... 
+Despite your absolute understanding of what this room was and how it functioned... 
+Somehow...
+Someway...
+We find ourselves here... 
+
+You have no one else to blame but yourself.
+
+---GAME OVER---");
 
       one.Exits.Add("east", two);
 
