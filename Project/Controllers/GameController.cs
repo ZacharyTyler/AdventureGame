@@ -35,10 +35,77 @@ namespace ConsoleAdventure.Project.Controllers
       Console.Clear();
       foreach (string message in _gameService.Messages)
       {
+        if (message == "victory")
+        {
+          _gameService.Messages.Clear();
+          while (true)
+          {
+            Console.Clear();
+            Console.WriteLine($@"The item has been used! 
+You watch as it all unfolds!!!
+Everything that you expected, and a few things you might not have expected, are all happening before your very eyes! 
+Isn't it just amazing?! 
+You Are Victorious!!!
+Type (Retry) to start again or (Quit) to close the application.
+");
+
+
+            string winChoice = Console.ReadLine();
+            switch (winChoice)
+            {
+              case "retry":
+              case "r":
+                Run();
+                break;
+              case "quit":
+              case "q":
+                Environment.Exit(0);
+                break;
+            }
+
+          }
+
+        }
+        else if (message == "failure")
+        {
+          while (true)
+          {
+            Console.Clear();
+            Console.WriteLine($@"It happened... 
+You have completely lost it.
+You knew that by entering this room, there was no turning back.
+Your choices have consequences.
+Despite all the knowledge that you've accumulated over your lifetime... 
+Despite your absolute understanding of what this room was and how it functioned... 
+Somehow...
+Someway...
+We find ourselves here... 
+
+You have no one else to blame but yourself.......
+
+---GAME OVER-- -
+Type (Retry) to start again or (Quit) to close the application.
+");
+            string failChoice = Console.ReadLine();
+            switch (failChoice)
+            {
+              case "retry":
+              case "r":
+                Run();
+                break;
+              case "quit":
+              case "q":
+                Environment.Exit(0);
+                break;
+            }
+          }
+        }
         Console.WriteLine(message);
       }
       _gameService.Messages.Clear();
     }
+
+
     //NOTE Gets the user input, calls the appropriate command, and passes on the option if needed.
     public void GetUserInput()
     {
@@ -74,14 +141,38 @@ namespace ConsoleAdventure.Project.Controllers
         case "quit":
         case "q":
           // _gameService.Quit();
-          Environment.Exit(0);
+          Console.WriteLine("Would you like to Quit the game or Reset it? (Quit)(Reset) Otherwise, you can press any other key to Cancel?");
+          string quitChoice = Console.ReadLine().ToLower();
+          switch (quitChoice)
+          {
+            case "quit":
+            case "q":
+              Environment.Exit(0);
+              break;
+            case "reset":
+            case "r":
+              Run();
+              break;
+          }
           break;
         case "reset":
         case "r":
           // _gameService.Reset();
-          Run();
+          Console.WriteLine("Are you sure you would like to Reset the Game? (Yes)(No)");
+          string resetChoice = Console.ReadLine().ToLower();
+          switch (resetChoice)
+          {
+            case "yes":
+            case "y":
+              Run();
+              break;
+            case "no":
+            case "n":
+              break;
+          }
           break;
         default:
+          Console.Clear();
           Console.Write(@"You sit contemplating your life choices...
 That's not something you can do right now and you know it!
 

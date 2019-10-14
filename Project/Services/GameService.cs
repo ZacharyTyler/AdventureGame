@@ -49,72 +49,24 @@ namespace ConsoleAdventure.Project
       {
         Messages.Add($@"You attempt to go {direction}, however you quickly realize that there is no {direction} to go. 
 Obstructing your path is just a plain old wall with a very simple existence: keeping you from going past it. 
-Maybe try a different route?");
+Maybe try a different route?
+");
       }
       else
       {
-        Messages.Add($@"If you're not going North, South, East, or West... You're not going anywhere!");
+        Messages.Add($@"If you're not going North, South, East, or West... You're not going anywhere!
+");
       }
 
       if (_game.CurrentRoom.Name == "five")
       {
         Messages.Clear();
-        Messages.Add(_game.CurrentRoom.Description);
-        // Reset();
+        Messages.Add("failure");
+
       }
 
 
-      // switch (direction)
-      // {
-      //   case "north":
-      //   case "n":
-      //     Messages.Add(@"That's a wall...");
-      //     break;
-      //   case "south":
-      //   case "s":
-      //     Messages.Add(@"You can't go that way.");
 
-      //     break;
-      //   case "east":
-      //   case "e":
-      //     _game.CurrentRoom = _game.CurrentRoom.Go("two");
-      //     break;
-      //   case "west":
-      //   case "w":
-      //     Messages.Add(@"You attempt to go West, however, you quickly realize that there is no West to go.");
-
-      //     break;
-      //   default:
-      //     Messages.Add(@"If you're not going North, South, East, or West... You're not going anywhere!");
-      //     break;
-      // }
-
-      // else if (_game.CurrentRoom.Name == "two")
-      // {
-      //   switch (direction)
-      //   {
-      //     case "north":
-      //     case "n":
-      //       Messages.Add(@"That's a wall...");
-      //       break;
-      //     case "south":
-      //     case "s":
-      //       Messages.Add(@"You can't go that way.");
-
-      //       break;
-      //     case "east":
-      //     case "e":
-      //       _game.CurrentRoom = _game.CurrentRoom.Go("three");
-      //       break;
-      //     case "west":
-      //     case "w":
-      //       _game.CurrentRoom = _game.CurrentRoom.Go("four");
-      //       break;
-      //     default:
-      //       Messages.Add(@"If you're not going North, South, East, or West... You're not going anywhere!");
-      //       break;
-      //   }
-      // }
     }
 
     public void Help()
@@ -127,12 +79,12 @@ I'm not sure how you could possibly forget something that you have been doing al
 
 You can use the following commands to interact with your surroundings:
 
-(Look): This command reminds you to use your eyes, 'cause let's face it! you're not really great at focussing.
+(Look): This command reminds you to use your eyes, 'cause let's face it: You're not really great at focussing without a conscious effort.
 
 (Go (N)(S)(E)(W)): This command allows your legs to do their thing! It gets you places. 
                    Specifically, the places that you tell them to take you.
 
-(Take (Item Name)): This command allows you to pick up items. 
+(Take (Item Name)): This command allows you to pick up stuff. 
                     Due to that unspeakably tragic incident when you were young; 
                     you must always specify the item that you are taking. 
                     Otherwise, your hands don't know what to do with themselves.
@@ -157,7 +109,7 @@ You can use the following commands to interact with your surroundings:
       Messages.Add("Inventory:");
       for (int i = 0; i < _game.CurrentPlayer.Inventory.Count; i++)
       {
-        Messages.Add($"{_game.CurrentPlayer.Inventory[i].Name}");
+        Messages.Add($"{_game.CurrentPlayer.Inventory[i].Name}: {_game.CurrentPlayer.Inventory[i].Description}");
       }
 
     }
@@ -167,7 +119,11 @@ You can use the following commands to interact with your surroundings:
       Messages.Add(_game.CurrentRoom.Description);
       foreach (Item i in _game.CurrentRoom.Items)
       {
-        Messages.Add($"{i.Name}");
+        Messages.Add($@"
+On the table rests '{i.Name}'! 
+Based on it's title, it may be an object that is pivital to your success?
+(hint, hint, nudge, nudge)
+");
       }
       // Messages.Add("You are well aware of the necessity of this item in completing your journey.");
     }
@@ -192,19 +148,27 @@ You can use the following commands to interact with your surroundings:
       _game.CurrentPlayer = player;
       if (playerName.ToLower() != "steve")
       {
-        Messages.Add($@"Knowing full well that your name is Steve, you decide to announce that your name is {playerName} to nobody in particular...
+        Messages.Add($@"Knowing full well that your name is Steve, you decide to announce to nobody in particular that your name is {playerName}...
 I'm not sure what would possess you to do that...?
+
 Alright Steve (definitely not {playerName}).
-You have a few options that you can type (help) to see.
-I know your completely aware of them and will have no need to, so we won't worry about that too much.");
+You have a few options here that you can type (help) to see.
+I say this knowing full well that you're completely aware of all the things that you can do. Let's jump right into it and we won't worry about it too much.
+");
       }
       else
       {
-        Messages.Add($@"Although you are completely alone, you decided to announce that your name is {playerName} to nobody in particular...
+        Messages.Add($@"Although you are completely alone, you decided to announce to nobody in particular that you are {playerName}...
 I'm not sure what would possess you to do that...?
+
 Alright Steve.
-You have a few options that you can type (help) to see. 
-I know your completely aware of them and will have no need to, so we won't worry too much about that.");
+You have a few commands that you can use here. 
+Remember that you can type (help) to see a list of these commands.
+Now, I say all this knowing full well that you're completely aware of all the things that you can do already. 
+Let's just jump right into it 'cause you won't have any need to look them up.
+
+As you know, there are exits to the West and East
+");
       }
       _game.Setup();
 
@@ -227,11 +191,14 @@ I know your completely aware of them and will have no need to, so we won't worry
       {
         _game.CurrentRoom.Items.Remove(item);
         _game.CurrentPlayer.Inventory.Add(item);
-        Messages.Add($@"You have successfuly used your hands to pocket the object.");
+        Messages.Add($@"You have successfuly used your hands to pocket the object.
+It's a difficult task, but someone's got to do it.
+");
       }
       else
       {
-        Messages.Add($@"That is not an item you can take from this room.");
+        Messages.Add($@"We both know that you have no need for that. Why are you even trying?
+        ");
       }
     }
 
@@ -253,26 +220,43 @@ I know your completely aware of them and will have no need to, so we won't worry
           {
             if (_game.CurrentRoom.Name == "four")
             {
-              Messages.Add($@"The item has been used! You are victorious!!!
-Type (Retry) to start again or (Quit) to close the application.");
+              if (itemName == "the object of extreme importance")
+              {
+                Messages.Add("victory");
+                //                 Messages.Add($@"The item has been used! 
+                // You watch as it all unfolds!!!
+                // Everything that you expected, and a few things you might not have expected, are all happening before your very eyes! 
+                // Isn't it just amazing?! 
+                // You Are Victorious!!!
+                // Type (Retry) to start again or (Quit) to close the application.");
+              }
+              else
+              {
+                Messages.Add($@"What are you doing?! You know that this is neither the time nor the place to be using that!
+");
+              }
+
             }
             else
             {
-              Messages.Add($@"What are you doing?! You know that this is neither the time nor the place to be using that!");
+              Messages.Add($@"What are you doing?! You know that this is neither the time nor the place to be using that!
+");
             }
           }
           else
           {
-            //FIXME This is not printing due to the for loop not running because 0 !< 0
-            Messages.Add($@"You don't have that item.");
+            Messages.Add($@"I never thought I would need to explain this to you... 
+If you don't have the item; you cannot use the item. It's a tricky concept, but you'll figure it out.
+");
           }
 
         }
       }
       else
       {
-        //FIXME This is not printing due to the for loop not running because 0 !< 0
-        Messages.Add($@"You don't have that item.");
+        Messages.Add($@"I never thought I would need to explain this to you... 
+If you don't have the item; you cannot use the item. It's a tricky concept, but you'll figure it out..
+");
       }
 
 
