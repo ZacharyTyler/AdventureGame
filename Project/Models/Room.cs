@@ -18,6 +18,8 @@ namespace ConsoleAdventure.Project.Models
     public List<Item> Items { get; set; }
     public Dictionary<string, IRoom> Exits { get; set; }
 
+    // public Dictionary<IItem, KeyValuePair<string, IRoom>> lockedRooms {get; set; }
+
     public IRoom Go(string direction)
     {
       if (Exits.ContainsKey(direction))

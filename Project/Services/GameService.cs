@@ -179,15 +179,16 @@ As you know, there are exits to the West and East
     ///<summary>When taking an item be sure the item is in the current room before adding it to the player inventory, Also don't forget to remove the item from the room it was picked up in</summary>
     public void TakeItem(string itemName)
     {
-      Item item = new Item(null, null);
-      for (int i = 0; i < _game.CurrentRoom.Items.Count; i++)
-      {
-        if (_game.CurrentRoom.Items[i].Name.ToLower() == itemName)
-        {
-          item = _game.CurrentRoom.Items[i];
-        }
-      }
-      if (item.Name != null)
+      // Item item = new Item(null, null);
+      // for (int i = 0; i < _game.CurrentRoom.Items.Count; i++)
+      // {
+      //   if (_game.CurrentRoom.Items[i].Name.ToLower() == itemName)
+      //   {
+      //     item = _game.CurrentRoom.Items[i];
+      //   }
+      // }
+      Item item = _game.CurrentRoom.Items.Find(i => i.Name.ToLower() == itemName);
+      if (item != null)
       {
         _game.CurrentRoom.Items.Remove(item);
         _game.CurrentPlayer.Inventory.Add(item);

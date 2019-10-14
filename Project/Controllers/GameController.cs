@@ -68,6 +68,7 @@ Type (Retry) to start again or (Quit) to close the application.
         }
         else if (message == "failure")
         {
+          _gameService.Messages.Clear();
           while (true)
           {
             Console.Clear();

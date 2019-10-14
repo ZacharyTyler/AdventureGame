@@ -20,7 +20,7 @@ It's East...
 If it had any less than those, one could argue that it would not be a room at all. 
 Even still, some would say that a room could have just three walls and still continue being a room. 
 Now, we could stand here idly debating the two, however, it may be best that we move on for the time being. 
-We will proceed with the understanding that the walls here have no more or less than four walls.
+We will proceed with the understanding that the rooms here have no more or less than four walls.
 
 There are exits to the East and the West. Luckily you should know exactly where to go!
 ");
